@@ -108,7 +108,38 @@
 	padding-inline: 10px;
 	padding-block-start: 3px;
 	padding-block-end: 3px;
-	border-bottom: 2px solid var(--accent-color);
+}
+
+.card__image__block {
+	position: relative;
+	border-block-end: solid 2px var(--accent-color);
+	border-block-start: solid 2px var(--accent-color);
+}
+
+.card__label {
+	position: absolute;
+	color: inherit;
+	opacity: 0.5;
+	font-family: var(--accent-font), fantasy;
+	font-weight: var(--normal);
+	font-size: 14px;
+	text-transform: uppercase;
+	inset-inline-end: 25px;
+	inset-block-start: 25px;
+	mix-blend-mode: hard-light;
+	text-shadow: 0 0 1px var(--bg-color);
+	z-index: 1;
+}
+
+@supports (
+	(text-stroke: 1px var(--bg-color)) or
+		(-webkit-text-stroke: 1px var(--bg-color))
+) {
+	.card__label {
+		-webkit-text-stroke: 1px var(--bg-color);
+		text-stroke: 1px var(--bg-color);
+		text-shadow: none;
+	}
 }
 
 .card__image {
@@ -116,7 +147,6 @@
 	block-size: 100%;
 	object-fit: cover;
 	object-position: center;
-	border-block-end: solid 2px var(--accent-color);
 }
 
 .card__text {
@@ -196,6 +226,85 @@
 	mix-blend-mode: difference;
 }
 
+.filter-contrast {
+	filter: contrast(51%) brightness(150%) saturate(158%);
+}
+
+.filter-grayscale {
+	filter: grayscale(0.6);
+}
+
+.filter-sepia {
+	filter: sepia(60%);
+}
+
+.filter-brightness {
+	filter: brightness(200%);
+}
+
+.multifilter {
+	filter: hue-rotate(20deg) brightness(1.4) saturate(1);
+}
+
+.filter-hue-rotate {
+	filter: sepia(0.8) saturate(0.5) hue-rotate(-90deg);
+}
+
+.filter-blur-brightness {
+	filter: blur(2px) brightness(200%);
+}
+
+#save__dialog[open] {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-inline-size: 353px;
+	gap: 30px;
+	border: 2px solid var(--accent-color);
+	padding: 30px;
+	color: var(--accent-color);
+	background: var(--bg-color);
+	margin: auto;
+	transition: opacity 2.3s ease-in-out;
+}
+
+#save__dialog[open]::backdrop {
+	opacity: 0.75;
+	background-color: #000;
+}
+
+.dialog__content {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.dialog__form {
+	display: flex;
+}
+
+.dialog__text {
+	font-family: var(--accent-font), fantasy;
+	font-size: 14px;
+	line-height: 1.5;
+	text-transform: uppercase;
+}
+
+.dialog__button {
+	display: flex;
+	flex-grow: 1;
+	text-transform: uppercase;
+	block-size: 38px;
+	cursor: pointer;
+}
+
+.floppy-dialog {
+	flex-shrink: 0;
+	align-self: center;
+	inline-size: 39px;
+	block-size: 39px;
+}
+
 @media (width<= 375px) {
 	.footer__button {
 		flex-direction: column;
@@ -205,5 +314,17 @@
 	.floppy {
 		inline-size: 28px;
 		block-size: 28px;
+	}
+
+	#save__dialog[open] {
+		padding: 30px 42px;
+	}
+
+	.dialog__button {
+		block-size: 38px;
+	}
+
+	.card__label {
+		inset-inline-end: 13px;
 	}
 }
